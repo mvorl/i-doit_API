@@ -12,7 +12,7 @@ setup(
     description='i-doit JSON RPC API',
     long_description="Python implementation of Benjamin Heisig's PHP-based i-doit API client library",
     license='AGPLv3+',
-    # url='',
+    url='https://github.com/mvorl/i-doit_API',
     platforms=['any'],
 
     zip_safe=False,
