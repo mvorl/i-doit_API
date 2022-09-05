@@ -1,0 +1,7 @@
+# API-Zugangsdaten zum i-doit Demo Server
+[DEFAULT]
+IDOIT_URL=https://demo.i-doit.com/
+IDOIT_API_KEY=c1ia5q
+IDOIT_USERNAME=admin
+IDOIT_PASSWORD=admin
+#IDOIT_LANGUAGE=en

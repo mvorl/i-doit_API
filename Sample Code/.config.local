@@ -1,0 +1,7 @@
+# API-Zugangsdaten zum i-doit Server
+[DEFAULT]
+IDOIT_URL=http://localhost/i-doit/
+IDOIT_API_KEY=xxx
+IDOIT_USERNAME=admin
+IDOIT_PASSWORD=admin
+#IDOIT_LANGUAGE=en
