@@ -11,7 +11,7 @@ The API's documentation (apart from the methods' documentation in this package -
 Testing
 =======
 
-To perform API tests, the test scripts connect to the `i-doit Demo system <https://demo.i-doit.com>`_. For this to work, the correct JSON-RPC API key needs to be entered in the file `idoitapi/tests/.config`.
+To perform API tests, the test scripts connect to the `i-doit Demo system <https://demo.i-doit.com>`_. For this to work, the correct JSON-RPC API key needs to be entered in the file `tests/.config`.
 It can be retrieved from the i-doit demo system by logging in, opening the user menu by hovering over the user name, choosing 'Administration', and clicking on 'Interfaces / External data`, 'JSON-RPC API', and 'Common Settings'.
 
 
