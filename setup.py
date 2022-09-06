@@ -11,6 +11,7 @@ setup(
 
     description='i-doit JSON RPC API',
     long_description="Python implementation of Benjamin Heisig's PHP-based i-doit API client library",
+    long_description_content_type='text/x-rst',
     license='AGPLv3+',
     url='https://github.com/mvorl/i-doit_API',
     platforms=['any'],
@@ -31,7 +32,8 @@ setup(
     python_requires='>=3.0',
     # scripts=[''],
     packages=[
-        'idoitapi'
+        'idoitapi',
+        'idoitapi.Console'
     ],
     include_package_data=True,
     install_requires=[
