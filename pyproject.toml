@@ -20,3 +20,9 @@ push = true
 "idoitapi/API.py" = [
     "API_AGENT_VERSION = '{pep440_version}'",
 ]
+"docs/make-apidoc.ps1" = [
+    ' -R "{pep440_version}"'
+]
+"docs/make-apidoc" = [
+    ' -R "{pep440_version}"'
+]

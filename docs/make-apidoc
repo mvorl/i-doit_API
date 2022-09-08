@@ -1,0 +1,7 @@
+#!/bin/sh
+source ../venv/bin/activate
+rm -rf ./source
+sphinx-apidoc -o ./source ../idoitapi --full -a --separate -H "i-doit_API" -A "Martin Vorländer" -R "1.0b2"
+cat ./sphinx-init.py >> source/conf.py
+rm -rf ./build
+sphinx-build -M html ./source ./build
