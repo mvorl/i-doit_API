@@ -5,6 +5,7 @@ def readme():
     with open('README.rst') as f:
         return f.read()
 
+
 setup(
     name='idoitapi',
     version='1.0b2',
@@ -29,7 +30,7 @@ setup(
     ],
     keywords='i-doit',
 
-    python_requires='>=3.0',
+    python_requires='>=3.5',
     # scripts=[''],
     packages=[
         'idoitapi',
