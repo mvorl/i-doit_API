@@ -1,6 +1,4 @@
-"""
-Requests for API namespace 'cmdb.object'
-"""
+from typing import Union, Dict
 
 from idoitapi.Request import Request
 from idoitapi.APIException import JSONRPC
@@ -11,13 +9,16 @@ from idoitapi.CMDBCategoryInfo import CMDBCategoryInfo
 
 
 class CMDBObject(Request):
+    """
+    Requests for API namespace 'cmdb.object'
+    """
 
-    def create(self, object_type, title, attributes=None):
+    def create(self, object_type: Union[int, str], title: str, attributes: Dict = None) -> int:
         """
         Create a new object.
 
         :param object_type: Object type identifier or constant
-        :type object_type: int or str
+        :type object_type: Union[int, str]
         :param str title: Object title
         :param dict attributes: (optional) Dict of additional common attributes:
              * string|int 'category',
@@ -50,16 +51,16 @@ class CMDBObject(Request):
         return result['id']
 
     # noinspection PyUnreachableCode
-    def create_with_categories(self, object_type, title, categories, attributes=None):
+    def create_with_categories(self,
+                               object_type: Union[int, str],
+                               title: str,
+                               categories: Dict,
+                               attributes: Dict = None) -> Dict:
         """
         Create a new object with category entries.
 
-        Note: The final implementation of this routine has been disabled
-        because of a bug on the server side (with API add-on v1.10.1)
-        (cf. `forum discussion <https://community.i-doit.com/topic/3613/>`_)
-
         :param object_type: Object type identifier or constant
-        :type object_type: int or str
+        :type object_type: Union[int, str]
         :param str title: Object title
         :param dict categories: Also create category entries;
             set category constant (string) as key and
@@ -99,7 +100,11 @@ class CMDBObject(Request):
                 raise JSONRPC(message='Unable to create object')
 
         else:
-
+            """
+            Note: The proper implementation of this routine was previously disabled
+            because of a bug on the server side (with API add-on v1.10.1)
+            (cf. `forum discussion <https://community.i-doit.com/topic/3613/>`_)
+            """
             object_id = self.create(object_type, title, attributes)
 
             requests = list()
@@ -148,7 +153,7 @@ class CMDBObject(Request):
 
         return result
 
-    def read(self, object_id):
+    def read(self, object_id: int) -> Dict:
         """
         Read common information about an object.
 
@@ -164,7 +169,7 @@ class CMDBObject(Request):
             }
         )
 
-    def update(self, object_id, attributes=None):
+    def update(self, object_id: int, attributes: Dict = None) -> None:
         """
         Update existing object
 
@@ -193,7 +198,7 @@ class CMDBObject(Request):
         if 'success' not in result or not result['success']:
             raise JSONRPC(message="Unable to update object {}".format(object_id))
 
-    def archive(self, object_id):
+    def archive(self, object_id: int) -> None:
         """
         Archive object
 
@@ -207,7 +212,7 @@ class CMDBObject(Request):
             }
         )
 
-    def delete(self, object_id):
+    def delete(self, object_id: int) -> None:
         """
         Mark object as deleted (it's still available)
 
@@ -221,7 +226,7 @@ class CMDBObject(Request):
             }
         )
 
-    def purge(self, object_id):
+    def purge(self, object_id: int) -> None:
         """
         Purge object (delete it irrevocable)
 
@@ -235,7 +240,7 @@ class CMDBObject(Request):
             }
         )
 
-    def mark_as_template(self, object_id):
+    def mark_as_template(self, object_id: int) -> None:
         """
         Convert object to template
 
@@ -251,7 +256,7 @@ class CMDBObject(Request):
             }
         )
 
-    def mark_as_mass_change_template(self, object_id):
+    def mark_as_mass_change_template(self, object_id: int) -> None:
         """
         Convert object to mass change template
 
@@ -267,7 +272,7 @@ class CMDBObject(Request):
             }
         )
 
-    def recycle(self, object_id):
+    def recycle(self, object_id: int) -> None:
         """
         Restore object to "normal" status
 
@@ -283,7 +288,7 @@ class CMDBObject(Request):
             }
         )
 
-    def load(self, object_id):
+    def load(self, object_id: int) -> Dict:
         """
         Load all data about object
 
@@ -345,7 +350,7 @@ class CMDBObject(Request):
 
         return obj
 
-    def read_all(self, object_id):
+    def read_all(self, object_id: int) -> Dict:
         """
         Read all information about object including category entries
 
@@ -362,12 +367,12 @@ class CMDBObject(Request):
 
         return objects[0]
 
-    def upsert(self, object_type, title, attributes=None):
+    def upsert(self, object_type: Union[int, str], title: str, attributes: Dict = None) -> int:
         """
         Create new object or fetch existing one based on its title and type
 
         :param object_type: Object type identifier or constant
-        :type  object_type: int or str
+        :type object_type: Union[int, str]
         :param str title: Object title
         :param dict attributes: (optional) Dict of additional common attributes
             ('category', 'purpose', 'cmdb_status', 'description')

@@ -1,23 +1,23 @@
-"""
-Requests for API namespace 'console'
-"""
+from typing import List, Dict
 
 from idoitapi.Request import Request
 from idoitapi.APIException import JSONRPC
 
 
 class Console(Request):
+    """
+    Requests for API namespace 'console'
+    """
 
-    def execute(self, method, options=None, arguments=None):
+    def execute(self, method: str, options: Dict = None, arguments: List[str] = None) -> List[str]:
         """
         Execute command
 
         :param str method: Method name
         :param dict options: List of options as key-value store
-        :param arguments: List of arguments as strings
-        :type arguments: list(str)
+        :param list[str] arguments: List of arguments as strings
         :return: Output (one value per line)
-        :rtype: list(str)
+        :rtype: list[str]
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
         params = {}

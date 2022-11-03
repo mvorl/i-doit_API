@@ -1,12 +1,13 @@
-"""
-Requests for API namespace 'cmdb.object_type_groups'
-"""
+from typing import List
 
 from idoitapi.Request import Request
 from idoitapi.APIException import InvalidParams
 
 
 class CMDBObjectTypeGroups(Request):
+    """
+    Requests for API namespace 'cmdb.object_type_groups'
+    """
 
     ORDER_BY_TITLE = 'title'
     ORDER_BY_STATUS = 'status'
@@ -16,7 +17,7 @@ class CMDBObjectTypeGroups(Request):
     SORT_ASCENDING = 'asc'
     SORT_DESCENDING = 'desc'
 
-    def read(self, order_by=None, sort_direction=None, limit=None):
+    def read(self, order_by: str = None, sort_direction: str = None, limit: int = None) -> List:
         """
         Fetch object type groups
 

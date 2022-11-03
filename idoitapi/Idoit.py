@@ -1,15 +1,16 @@
-"""
-Requests for API namespace 'idoit'
-"""
+from typing import Any, List, Dict
 
 from idoitapi.Request import Request
 from idoitapi.APIException import JSONRPC
 
 
 class Idoit(Request):
+    """
+    Requests for API namespace 'idoit'
+    """
 
     @property
-    def version(self):
+    def version(self) -> str:
         """
         Fetch the i-doit version
 
@@ -20,7 +21,7 @@ class Idoit(Request):
         return data['version']
 
     @property
-    def version_type(self):
+    def version_type(self) -> str:
         """
         Fetch the i-doit version type
 
@@ -30,7 +31,7 @@ class Idoit(Request):
         data = self.read_version()
         return data['type']
 
-    def read_version(self):
+    def read_version(self) -> Dict:
         """
         Read information about i-doit
 
@@ -40,7 +41,7 @@ class Idoit(Request):
         """
         return self._api.request('idoit.version')
 
-    def get_addons(self):
+    def get_addons(self) -> Dict:
         """
         Read information about installed add-ons
 
@@ -55,7 +56,7 @@ class Idoit(Request):
 
         return response['result']
 
-    def get_license(self):
+    def get_license(self) -> Dict:
         """
         Read license information
 
@@ -65,7 +66,7 @@ class Idoit(Request):
         """
         return self._api.request('idoit.license.read')
 
-    def read_constants(self):
+    def read_constants(self) -> Dict:
         """
         Read list of defined constants
 
@@ -75,7 +76,7 @@ class Idoit(Request):
         """
         return self._api.request('idoit.constants')
 
-    def search(self, query):
+    def search(self, query: str) -> Any:
         """
         Search i-doit's database
 
@@ -90,11 +91,11 @@ class Idoit(Request):
             }
         )
 
-    def batch_search(self, queries):
+    def batch_search(self, queries: List[str]) -> Any:
         """
         Perform one or more searches at once
 
-        :param list queries: Queries as strings
+        :param list[str] queries: Queries as strings
         :return: Search results
         """
         requests = list()

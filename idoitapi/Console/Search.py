@@ -1,30 +1,31 @@
-"""
-Requests for API namespace 'console.search'
-"""
+from typing import List
 
 from idoitapi.Console.Console import Console
 
 
 class Search(Console):
+    """
+    Requests for API namespace 'console.search'
+    """
 
-    def create_index(self):
+    def create_index(self) -> List[str]:
         """
         Create search index from scratch
 
         :return: Output (one value per line)
-        :rtype: list(str)
+        :rtype: list[str]
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
         return self.execute(
             'console.search.index'
         )
 
-    def update_index(self):
+    def update_index(self) -> List[str]:
         """
         Update existing search index
 
         :return: Output (one value per line)
-        :rtype: list(str)
+        :rtype: list[str]
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
         return self.execute(
@@ -34,13 +35,13 @@ class Search(Console):
             }
         )
 
-    def search(self, query):
+    def search(self, query: str) -> List[str]:
         """
         Search for query
 
-        :param query: Query
+        :param str query: Query
         :return: Output (one value per line)
-        :rtype: list(str)
+        :rtype: list[str]
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
         return self.execute(

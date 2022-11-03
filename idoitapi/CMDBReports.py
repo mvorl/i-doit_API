@@ -1,13 +1,14 @@
-"""
-Requests for API namespace 'cmdb.reports'
-"""
+from typing import List
 
 from idoitapi.Request import Request
 
 
 class CMDBReports(Request):
+    """
+    Requests for API namespace 'cmdb.reports'
+    """
 
-    def list_reports(self):
+    def list_reports(self) -> List:
         """
         Lists all reports
 
@@ -19,7 +20,7 @@ class CMDBReports(Request):
             'cmdb.reports'
         )
 
-    def read(self, report_id):
+    def read(self, report_id: int) -> List:
         """
         Fetches the result of a report
 
@@ -36,18 +37,17 @@ class CMDBReports(Request):
         )
 
         if not isinstance(result, list):
-            return ()
+            return []
 
         return result
 
-    def batch_read(self, report_ids):
+    def batch_read(self, report_ids: List[int]) -> List[List]:
         """
         Fetches the result of one or more reports
 
-        :param report_ids: List of report identifiers as integers
-        :type report_ids: list(int)
+        :param list[int] report_ids: List of report identifiers as integers
         :return: list of lists
-        :rtype: list(list)
+        :rtype: list[list]
         """
         requests = []
 

@@ -1,6 +1,4 @@
-"""
-Requests for API namespace 'cmdb.category_info'
-"""
+from typing import List, Dict, Tuple
 
 from idoitapi.Request import Request
 from idoitapi.APIException import JSONRPC
@@ -9,14 +7,17 @@ from idoitapi.CMDBObjectTypeCategories import CMDBObjectTypeCategories
 
 
 class CMDBCategoryInfo(Request):
+    """
+    Requests for API namespace 'cmdb.category_info'
+    """
 
-    def read(self, category):
+    def read(self, category: str) -> Dict:
         """
         Fetch information about a category
 
         :param str category: Category constant
         :return: Result set
-        :rtype: dict
+        :rtype: Dict
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
         return self._api.request(
@@ -26,14 +27,14 @@ class CMDBCategoryInfo(Request):
             }
         )
 
-    def batch_read(self, categories):
+    def batch_read(self, categories: List[str]) -> List[Dict]:
         """
         Fetches information about one or more categories
 
         :param categories: List of category constants as strings
-        :type categories: list(str)
+        :type categories: list[str]
         :return: Result set
-        :rtype: list(dict)
+        :rtype: list[dict]
         """
         requests = list()
 
@@ -47,7 +48,7 @@ class CMDBCategoryInfo(Request):
 
         return self._api.batch_request(requests)
 
-    def read_all(self):
+    def read_all(self) -> Dict:
         """
         Try to fetch information about all available categories
 
@@ -85,14 +86,14 @@ class CMDBCategoryInfo(Request):
         return dict(zip(clean_category_constants, categories))
 
     @staticmethod
-    def get_virtual_category_constants():
+    def get_virtual_category_constants() -> Tuple[str, ...]:
         """
         Get list of constants for virtual categories
 
         "Virtual" means these categories have no attributes at all.
 
-        :return: list of constants
-        :rtype: list
+        :return: tuple of constants
+        :rtype: Tuple[str, ...]
         """
         return (
             'C__CATG__CABLING',

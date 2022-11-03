@@ -1,18 +1,19 @@
-"""
-Requests for API namespace 'cmdb.object_type_categories'
-"""
+from typing import List, Union
 
 from idoitapi.Request import Request
 
 
 class CMDBObjectTypeCategories(Request):
+    """
+    Requests for API namespace 'cmdb.object_type_categories'
+    """
 
-    def read(self, object_type):
+    def read(self, object_type: Union[int, str]) -> List:
         """
         Fetch assigned categories for a specific object type by its identifier or constant
 
-        :param object_type: Object type identifier or constant  as integer or string
-        :type object_type: int or str
+        :param object_type: Object type identifier or constant as integer or string
+        :type object_type: Union[int, str]
         :return: categories
         :rtype: list
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
@@ -24,7 +25,7 @@ class CMDBObjectTypeCategories(Request):
             }
         )
 
-    def read_by_id(self, object_type):
+    def read_by_id(self, object_type: int) -> List:
         """
         Fetch assigned categories for a specific object type by its identifier
 
@@ -35,7 +36,7 @@ class CMDBObjectTypeCategories(Request):
         """
         return self.read(object_type)
 
-    def read_by_const(self, object_type):
+    def read_by_const(self, object_type: str) -> List:
         """
         Fetch assigned categories for a specific object type by its constant
 
@@ -46,13 +47,13 @@ class CMDBObjectTypeCategories(Request):
         """
         return self.read(object_type)
 
-    def batch_read(self, object_types):
+    def batch_read(self, object_types: List[Union[int, str]]) -> List:
         """
         Fetches assigned categories for one or more objects types at once
         identified by their identifiers or constants
 
         :param object_types: List of object types identifiers or constants
-        :type object_types: list(int or str)
+        :type object_types: List[Union[int, str]]
         :return: Result
         :rtype: list
         """
@@ -68,26 +69,26 @@ class CMDBObjectTypeCategories(Request):
 
         return self._api.batch_request(requests)
 
-    def batch_read_by_id(self, object_types):
+    def batch_read_by_id(self, object_types: List[int]) -> List:
         """
         Fetches assigned categories for one or more objects types at once
         identified by their identifiers
 
         :param object_types: List of object types constants as integer
-        :type object_types: list(int)
+        :type object_types: list[int]
         :return: Result
         :rtype: list
         """
-        return self.read(object_types)
+        return self.batch_read(object_types)
 
-    def batch_read_by_const(self, object_types):
+    def batch_read_by_const(self, object_types: List[str]) -> List:
         """
         Fetches assigned categories for one or more objects types at once
         identified by their constants
 
         :param object_types: List of object types constants as string
-        :type object_types: list(str)
+        :type object_types: List[str]
         :return: Result
         :rtype: list
         """
-        return self.read(object_types)
+        return self.batch_read(object_types)

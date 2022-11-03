@@ -1,14 +1,15 @@
-"""
-Requests for API namespace 'cmdb.category'
-"""
+from typing import List, Dict
 
 from idoitapi.Request import Request
 from idoitapi.APIException import JSONRPC
 
 
 class CMDBCategory(Request):
+    """
+    Requests for API namespace 'cmdb.category'
+    """
 
-    def save(self, object_id, category, attributes, entry_id=None):
+    def save(self, object_id: int, category: str, attributes: Dict, entry_id: int = None) -> int:
         """
         Create new or update existing category entry for a specific object.
         Suitable for single- and multi-value categories.
@@ -43,7 +44,7 @@ class CMDBCategory(Request):
 
         return result['entry']
 
-    def create(self, object_id, category, attributes):
+    def create(self, object_id: int, category: str, attributes: Dict) -> int:
         """
         Create new category entry for a specific object.
 
@@ -67,7 +68,7 @@ class CMDBCategory(Request):
 
         return self.require_success_for(result)
 
-    def read(self, object_id, category, status=2):
+    def read(self, object_id: int, category: str, status: int = 2) -> List[Dict]:
         """
         Read one or more category entries for a specific object
         (works with both single- and multi-valued categories).
@@ -82,7 +83,7 @@ class CMDBCategory(Request):
             defaults to: 2 = normal;
             note: a status != 2 is only suitable for multi-value categories
         :return: List of result sets (for both single- and multi-valued categories)
-        :rtype: list(dict)
+        :rtype: list[dict]
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
         return self._api.request(
@@ -94,7 +95,7 @@ class CMDBCategory(Request):
             }
         )
 
-    def read_one_by_id(self, object_id, category, entry_id, status=2):
+    def read_one_by_id(self, object_id: int, category: str, entry_id: int, status: int = 2) -> Dict:
         """
         Read one specific category entry for a specific object
         (works with both single- and multi-valued categories)
@@ -103,8 +104,8 @@ class CMDBCategory(Request):
         :param str category: Category constant
         :param int entry_id: Entry identifier
         :param int status: Filter entries by status:
-            2 = normal;
-            3 = archived;
+            2 = normal,
+            3 = archived,
             4 = deleted,
             -1 = combination of all;
             defaults to: 2 = normal;
@@ -129,7 +130,7 @@ class CMDBCategory(Request):
                 )
             )
 
-    def read_first(self, object_id, category):
+    def read_first(self, object_id: int, category: str) -> Dict:
         """
         Read first category entry for a specific object
         (works with both single- and multi-valued categories)
@@ -145,7 +146,7 @@ class CMDBCategory(Request):
             return dict()
         return entries[0]
 
-    def update(self, object_id, category, attributes, entry_id=None):
+    def update(self, object_id: int, category: str, attributes: Dict, entry_id: int = None) -> None:
         """
         Update category entry for a specific object
 
@@ -169,7 +170,7 @@ class CMDBCategory(Request):
 
         self.require_success_without_identifier(result)
 
-    def archive(self, object_id, category, entry_id):
+    def archive(self, object_id: int, category: str, entry_id: int) -> None:
         """
         Archive entry in a multi-value category for a specific object
 
@@ -187,7 +188,7 @@ class CMDBCategory(Request):
             }
         )
 
-    def delete(self, object_id, category, entry_id):
+    def delete(self, object_id: int, category: str, entry_id: int) -> None:
         """
         Marks entry in a multi-value category for a specific object as deleted
 
@@ -205,7 +206,7 @@ class CMDBCategory(Request):
             }
         )
 
-    def purge(self, object_id, category, entry_id=None):
+    def purge(self, object_id: int, category: str, entry_id: int = None) -> None:
         """
         Purge entry in a single- or multi-value category for a specific object
 
@@ -227,7 +228,7 @@ class CMDBCategory(Request):
             params
         )
 
-    def recycle(self, object_id, category, entry_id):
+    def recycle(self, object_id: int, category: str, entry_id: int) -> None:
         """
         Restore entry in a multi-value category for a specific object to "normal" state
 
@@ -245,7 +246,7 @@ class CMDBCategory(Request):
             }
         )
 
-    def quick_purge(self, object_id, category, entry_id):
+    def quick_purge(self, object_id: int, category: str, entry_id: int) -> None:
         """
         Purge entry in a multi-value category for a specific object
 
@@ -266,16 +267,15 @@ class CMDBCategory(Request):
 
         self.require_success_without_identifier(result)
 
-    def batch_create(self, object_ids, category, attributes):
+    def batch_create(self, object_ids: List[int], category: str, attributes: List[Dict]) -> List[int]:
         """
         Create multiple entries for a specific category and one or more objects
 
-        :param list object_ids: List of object identifiers as integers
+        :param list[int] object_ids: List of object identifiers as integers
         :param str category: Category constant
-        :param attributes: attributes
-        :type attributes: list(dict)
+        :param list[dict] attributes: attributes
         :return: List of entry identifiers as integers
-        :rtype: list
+        :rtype: list[int]
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
         entry_ids = list()
@@ -302,21 +302,19 @@ class CMDBCategory(Request):
 
         return entry_ids
 
-    def batch_read(self, object_ids, categories, status=2):
+    def batch_read(self, object_ids: List[int], categories: List[str], status: int = 2) -> List[Dict]:
         """
         Read one or more category entries for one or more objects
 
-        :param object_ids: List of object identifiers as integers
-        :type object_ids: list(int)
-        :param categories: List of category constants as strings
-        :type categories: list(str)
+        :param List[int] object_ids: List of object identifiers as integers
+        :param list[str] categories: List of category constants as strings
         :param int status: Filter entries by status:
-             * 2 = normal;
-             * 3 = archived;
-             * 4 = deleted,
-             * -1 = combination of all;
-             * defaults to: 2 = normal;
-             * note: a status != 2 is only suitable for multi-value categories
+            2 = normal,
+            3 = archived,
+            4 = deleted,
+            -1 = combination of all;
+            defaults to: 2 = normal;
+            note: a status != 2 is only suitable for multi-value categories
         :return: list of result sets (for both single- and multi-valued categories)
         :rtype: list
         """
@@ -358,11 +356,11 @@ class CMDBCategory(Request):
 
         return results
 
-    def batch_update(self, object_ids, category, attributes):
+    def batch_update(self, object_ids: List[int], category: str, attributes: Dict) -> None:
         """
         Update single-value category for one or more objects
 
-        :param list object_ids: List of object identifiers as integers
+        :param list[int] object_ids: List of object identifiers as integers
         :param str category: Category constant
         :param dict attributes: Attributes
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
@@ -383,12 +381,12 @@ class CMDBCategory(Request):
 
         self.require_success_for_all(result)
 
-    def clear(self, object_id, categories):
+    def clear(self, object_id: int, categories: List[str]) -> int:
         """
         Archive category entries for a specific object
 
         :param int object_id: Object identifier
-        :param list categories: List of category constants as strings
+        :param list[str] categories: List of category constants as strings
         :return: Number of purged category entries
         :rtype: int
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error

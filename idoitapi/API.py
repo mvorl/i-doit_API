@@ -1,21 +1,28 @@
-"""
-Low-Level object to access the i-doit JSON-RPC API.
-"""
-
 import json
+from typing import Dict, Any, List
+
 import requests
 from idoitapi.APIException import JSONRPC, InvalidParams, InternalError, MethodNotFound, UnknownError
 
 # Values for User-Agent header
-# ToDo: Grab User-Agent name and version from setup.py
+# ToDo: Grab User-Agent name from setup.py
 API_AGENT_NAME = 'idoitapi' + '-python'
 API_AGENT_VERSION = '1.0b2'
 API_AGENT_COMMENT = ''
 
 
 class API(object):
+    """
+    Low-Level object to access the i-doit JSON-RPC API.
+    """
 
-    def __init__(self, url, key, language=None, username=None, password=None):
+    def __init__(self,
+                 url: str,
+                 key: str,
+                 language: str = None,
+                 username: str = None,
+                 password: str = None
+                 ) -> None:
         """
         If username and password are not given, 'System API' user will be used.
 
@@ -73,7 +80,7 @@ class API(object):
     #     except APIException:
     #         pass  # Do nothing because this is a destructor.
 
-    def is_logged_in(self):
+    def is_logged_in(self) -> bool:
         """
         Check whether API is logged in
 
@@ -82,7 +89,7 @@ class API(object):
         """
         return self._session_id is not None
 
-    def login(self, username=None, password=None):
+    def login(self, username: str = None, password: str = None) -> None:
         """
         Login to API.
 
@@ -106,7 +113,7 @@ class API(object):
         )
         self._session_id = response['session-id']
 
-    def logout(self):
+    def logout(self) -> None:
         """
         Logout from API.
 
@@ -115,7 +122,7 @@ class API(object):
         self.request('idoit.logout')
         self._session_id = None
 
-    def generate_id(self):
+    def generate_id(self) -> int:
         """
         Generate new JSON-RPC request identifier
 
@@ -125,7 +132,7 @@ class API(object):
         self._id += 1
         return self._id
 
-    def count_request(self):
+    def count_request(self) -> int:
         """
         How many requests were already sent?
 
@@ -134,7 +141,7 @@ class API(object):
         """
         return self._id
 
-    def request(self, method, params=None, headers=None):
+    def request(self, method: str, params: Dict = None, headers: Dict = None) -> Any:
         """
         Perform a JSON RPC request.
 
@@ -194,14 +201,15 @@ class API(object):
 
         return response['result']
 
-    def batch_request(self, payload, headers=None):
+    def batch_request(self, payload: List[Dict], headers: Dict = None) -> List[Any]:
         """
         Perform a JSON RPC batch request.
 
-        :param list payload: list of requests, each with 'method' key, and optionally 'params' and 'id'
+        :param list[dict] payload: list of requests,
+            each with 'method' key, and optionally 'params' and 'id'
         :param dict headers: additional header lines
         :return: list of response data, each with either a 'result' or an 'error' key
-        :rtype: list
+        :rtype: list[dict]
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
         req_headers = {

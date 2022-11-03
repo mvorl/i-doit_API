@@ -1,12 +1,13 @@
-"""
-Requests for API namespace 'cmdb.status'
-"""
+from typing import List, Dict
 
 from idoitapi.Request import Request
-from idoitapi.APIException import JSONRPC
+# from idoitapi.APIException import JSONRPC
 
 
 class CMDBStatus(Request):
+    """
+    Requests for API namespace 'cmdb.status'
+    """
 
     ATTRIBUTE_ID = 'id'
     ATTRIBUTE_TITLE = 'title'
@@ -14,19 +15,19 @@ class CMDBStatus(Request):
     ATTRIBUTE_COLOR = 'color'
     ATTRIBUTE_EDITABLE = 'editable'
 
-    def read(self):
+    def read(self) -> List[Dict]:
         """
         Get list of available CMDB states
 
         :return: Indexed array of associative arrays
-        :rtype: list(dict)
+        :rtype: list[dict]
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
         return self._api.request(
             'cmdb.status.read'
         )
 
-    def save(self, title, constant, color, identifier=None):
+    def save(self, title: str, constant: str, color: str, identifier: int = None) -> int:
         """
         Create new or update existing CMDB status
 
@@ -54,7 +55,7 @@ class CMDBStatus(Request):
 
         return self.require_success_for(result)
 
-    def delete(self, status_id):
+    def delete(self, status_id: int) -> None:
         """
         Purge CMDB status from database
 

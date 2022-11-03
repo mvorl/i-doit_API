@@ -1,6 +1,4 @@
-"""
-Special methods for subnets
-"""
+from typing import Union, List
 
 from idoitapi.Request import Request
 from idoitapi.CMDBCategory import CMDBCategory
@@ -9,28 +7,30 @@ from idoitapi.utils import ip2long, long2ip
 
 
 class Subnet(Request):
+    """
+    Special methods for subnets
+    """
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         super(self.__class__, self).__init__(*args, **kwargs)
 
-        self.taken = []
+        self.taken: List[str] = []
         """List of used IP addresses"""
 
-        self.current = None
+        self.current: int = None
         """Current IP address as long integer"""
 
-        self.first = None
+        self.first: int = None
         """First IP address in subnet as long integer"""
 
-        self.last = None
+        self.last: int = None
         """Last IP address in subnet as long integer"""
 
-    def load(self, object_id):
+    def load(self, object_id: int) -> None:
         """
         Fetches some information about subnet object
 
         :param int object_id: Object identifier
-        :return: self
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
         category = CMDBCategory(self._api)
@@ -50,9 +50,7 @@ class Subnet(Request):
 
         self.current = self.first
 
-        return self
-
-    def has_next(self):
+    def has_next(self) -> bool:
         """
         Is there a free IP address?
 
@@ -69,12 +67,12 @@ class Subnet(Request):
         else:
             return False
 
-    def next(self):
+    def next(self) -> Union[str, None]:
         """
         Fetches next free IP address
 
         :return: IPv4 address, or ``None`` if no free UP address
-        :rtype: str or ``None``
+        :rtype: Union[str, None]
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
         if self.current is None:
@@ -88,7 +86,7 @@ class Subnet(Request):
         else:
             return None
 
-    def is_free(self, ip_address):
+    def is_free(self, ip_address: str) -> bool:
         """
         Is IP address currently unused in subnet?
 
@@ -104,7 +102,7 @@ class Subnet(Request):
 
         return not self.is_used(ip_long)
 
-    def is_used(self, long_ip):
+    def is_used(self, long_ip: int) -> bool:
         """
         Is IP address already taken in subnet?
 

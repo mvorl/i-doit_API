@@ -7,7 +7,7 @@ from socket import inet_aton, inet_ntoa
 from struct import unpack, pack
 
 
-def ip2long(ip_addr):
+def ip2long(ip_addr: str) -> int:
     """
     Convert IPv4 address in dotted notation to int
 
@@ -18,7 +18,7 @@ def ip2long(ip_addr):
     return unpack("!L", inet_aton(ip_addr))[0]
 
 
-def long2ip(ip_long):
+def long2ip(ip_long: int) -> str:
     """
     Convert IPv4 address as int to dotted notation
 
@@ -29,7 +29,7 @@ def long2ip(ip_long):
     return inet_ntoa(pack("!L", ip_long))
 
 
-def base64_encode(file_path):
+def base64_encode(file_path: str) -> str:
     """
     Encode a file contents to base64
 

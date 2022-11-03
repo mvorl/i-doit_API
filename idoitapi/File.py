@@ -1,8 +1,5 @@
-"""
-Requests for assigned files
-"""
-
 import os
+from typing import Dict
 
 from idoitapi.Request import Request
 from idoitapi.APIException import JSONRPC
@@ -13,7 +10,11 @@ from idoitapi.utils import base64_encode
 
 
 class File(Request):
-    def add(self, object_id, file_path, description=None):
+    """
+    Requests for assigned files
+    """
+
+    def add(self, object_id: int, file_path: str, description: str = None) -> None:
         """
         Add a new file to a specific object.
         A new file object will be created and assigned to the specific object.
@@ -21,8 +22,6 @@ class File(Request):
         :param int object_id: Object identifier
         :param str file_path: Path to file
         :param str description: (Optional) description
-        :return: self
-        :rtype: object
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         :raises: :py:exc:`OSError` if file not found or unreadable
         """
@@ -52,18 +51,13 @@ class File(Request):
             },
         )
 
-        return self
-
-    def batch_add(self, object_id, files):
+    def batch_add(self, object_id: int, files: Dict) -> None:
         """
         Add multiple new files to a specific object.
         New file objects will be created and assigned to the specific object.
 
         :param int object_id:  Object identifier
-        :param files: Dict (key: path to file; value: description)
-        :type files: dict(str, str)
-        :return: self
-        :rtype: object
+        :param dict files: Dict (key: path to file; value: description)
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         :raises: :py:exc:`OSError` if any file not found or unreadable
         """
@@ -117,5 +111,3 @@ class File(Request):
             counter += 1
 
         self._api.batch_request(requests)
-
-        return self

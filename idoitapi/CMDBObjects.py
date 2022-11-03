@@ -1,31 +1,32 @@
-"""
-Requests for API namespace 'cmdb.objects'
-"""
+from typing import List, Union, Dict, Type
 
 from idoitapi.Request import Request
 from idoitapi.APIException import JSONRPC, InvalidParams
 
 
 class CMDBObjects(Request):
+    """
+    Requests for API namespace 'cmdb.objects'
+    """
 
     SORT_ASCENDING = 'ASC'
     SORT_DESCENDING = 'DESC'
 
-    def create(self, objects):
+    def create(self, objects: List[Dict]) -> List[int]:
         """
         Create one or more objects
 
-        :param list objects: List of objects
+        :param list[dict] objects: List of objects
             Mandatory attributes ('type', 'title') and optional attributes
             ('category', 'purpose', 'cmdb_status', 'description')
         :return: Object identifiers
-        :rtype: list
+        :rtype: list[int]
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
         if not isinstance(objects, list):
             raise InvalidParams(message='objects parameter is invalid')
         if len(objects) == 0:
-            return ()
+            return []
 
         requests = list()
 
@@ -37,16 +38,16 @@ class CMDBObjects(Request):
 
         result = self._api.batch_request(requests)
 
-        return (obj['id'] for obj in result)
+        return [obj['id'] for obj in result]
 
     def read(self,
-             filter_params=None,
-             limit=None,
-             offset=None,
-             order_by=None,
-             sort=None,
-             categories=None,
-             ):
+             filter_params: Dict = None,
+             limit: int = None,
+             offset: int = None,
+             order_by: str = None,
+             sort: str = None,
+             categories: Union[List[str], Type[True]] = None
+             ) -> List[Dict]:
         """
         Fetch objects.
 
@@ -67,10 +68,10 @@ class CMDBObjects(Request):
         :param categories: (optional) Also fetch category entries;
             add a list of category constants as strings or
             ``True`` for all assigned categories
-        :type categories: list(str) or ``True``
-        :return: list(dict)
+        :type categories: union[list[str], True]
+        :return: list[dict]
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
-       """
+        """
         params = {}
 
         if isinstance(filter_params, dict):
@@ -103,7 +104,7 @@ class CMDBObjects(Request):
             params
         )
 
-    def read_by_ids(self, object_ids, categories=None):
+    def read_by_ids(self, object_ids: List[int], categories: Union[List[str], Type[True]] = None) -> List[Dict]:
         """
         Fetch objects by their identifiers.
 
@@ -111,9 +112,9 @@ class CMDBObjects(Request):
         :param categories: (optional) Also fetch category entries;
             add a list of category constants as strings or
             ``True`` for all assigned categories
-        :type categories: list(str) or ``True``
+        :type categories: Union[List[str], True, None]
         :return: List of dicts
-        :rtype: list(dict)
+        :rtype: list[dict]
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
         if not isinstance(object_ids, list):
@@ -132,7 +133,7 @@ class CMDBObjects(Request):
             params
         )
 
-    def read_by_type(self, object_type, categories=None):
+    def read_by_type(self, object_type: str, categories: Union[List[str], Type[True]] = None) -> List[Dict]:
         """
         Fetch objects by their object type.
 
@@ -140,9 +141,9 @@ class CMDBObjects(Request):
         :param categories: (optional) Also fetch category entries;
             add a list of category constants as array of strings or
             ``True`` for all assigned categories
-        :type categories: list(str) or ``True``
+        :type categories: Union[List[str], True, None]
         :return: List of dicts
-        :rtype: list(dict)
+        :rtype: list[dict]
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
         params = {
@@ -159,7 +160,7 @@ class CMDBObjects(Request):
             params
         )
 
-    def read_archived(self, object_type=None, categories=None):
+    def read_archived(self, object_type: str = None, categories: Union[List[str], Type[True]] = None) -> List[Dict]:
         """
         Fetch archived objects optionally filtered by type
 
@@ -167,9 +168,9 @@ class CMDBObjects(Request):
         :param categories: (optional) Also fetch category entries;
             add a list of category constants as array of strings or
             ``True`` for all assigned categories
-        :type categories: list(str) or ``True``
+        :type categories: Union[List[str], True, None]
         :return: List of dicts
-        :rtype: list(dict)
+        :rtype: list[dict]
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
         params = {
@@ -189,7 +190,7 @@ class CMDBObjects(Request):
             params
         )
 
-    def read_deleted(self, object_type=None, categories=None):
+    def read_deleted(self, object_type: str = None, categories: Union[List[str], Type[True]] = None) -> List[Dict]:
         """
         Fetch deleted objects optionally filtered by type
 
@@ -197,7 +198,7 @@ class CMDBObjects(Request):
         :param categories: (optional) Also fetch category entries;
             add a list of category constants as array of strings or
             ``True`` for all assigned categories
-        :type categories: list(str) or ``True``
+        :type categories: Union[List[str], True, None]
         :return: List of dicts
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
@@ -218,7 +219,7 @@ class CMDBObjects(Request):
             params
         )
 
-    def get_id(self, title, object_type=None):
+    def get_id(self, title: str, object_type: str = None) -> int:
         """
         Fetch an object identifier by object title and (optional) type
 
@@ -246,17 +247,17 @@ class CMDBObjects(Request):
         else:
             raise JSONRPC(message="Found {} objects".format(len(result)))
 
-    def update(self, objects):
+    def update(self, objects: List[Dict]) -> None:
         """
         Update one or more existing objects
 
         :param objects: list of object attributes ('id' and 'title')
-        :type objects: list(dict)
+        :type objects: list[dict]
         """
         if not isinstance(objects, list):
             raise InvalidParams(message='objects parameter is invalid')
         if len(objects) == 0:
-            return ()
+            return
 
         requests = list()
 
@@ -268,17 +269,17 @@ class CMDBObjects(Request):
 
         self._api.batch_request(requests)
 
-    def archive(self, object_ids):
+    def archive(self, object_ids: List[int]) -> None:
         """
         Archive one or more objects
 
         :param object_ids: List of object identifiers as integers
-        :type object_ids: list(int)
+        :type object_ids: List[int]
         """
         if not isinstance(object_ids, list):
             raise InvalidParams(message='objects parameter is invalid')
         if len(object_ids) == 0:
-            return ()
+            return
 
         requests = list()
 
@@ -292,17 +293,17 @@ class CMDBObjects(Request):
 
         self._api.batch_request(requests)
 
-    def delete(self, object_ids):
+    def delete(self, object_ids: List[int]) -> None:
         """
         Delete one or more objects
 
         :param object_ids: List of object identifiers as integers
-        :type object_ids: list(int)
+        :type object_ids: List[int]
         """
         if not isinstance(object_ids, list):
             raise InvalidParams(message='objects parameter is invalid')
         if len(object_ids) == 0:
-            return ()
+            return
 
         requests = list()
 
@@ -316,17 +317,17 @@ class CMDBObjects(Request):
 
         self._api.batch_request(requests)
 
-    def purge(self, object_ids):
+    def purge(self, object_ids: List[int]) -> None:
         """
         Purge one or more objects
 
         :param object_ids: List of object identifiers as integers
-        :type object_ids: list(int)
+        :type object_ids: List[int]
         """
         if not isinstance(object_ids, list):
             raise InvalidParams(message='objects parameter is invalid')
         if len(object_ids) == 0:
-            return ()
+            return
 
         requests = list()
 
@@ -340,17 +341,17 @@ class CMDBObjects(Request):
 
         self._api.batch_request(requests)
 
-    def recycle(self, object_ids):
+    def recycle(self, object_ids: List[int]) -> None:
         """
         Restore objects to "normal" status.
 
         :param object_ids: List of object identifiers as integers
-        :type object_ids: list(int)
+        :type object_ids: List[int]
         """
         if not isinstance(object_ids, list):
             raise InvalidParams(message='objects parameter is invalid')
         if len(object_ids) == 0:
-            return ()
+            return
 
         requests = list()
 

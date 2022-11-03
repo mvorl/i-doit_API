@@ -26,3 +26,7 @@ push = true
 "docs/make-apidoc" = [
     ' -R "{pep440_version}"'
 ]
+
+[mypy]
+packages = "idoitapi"
+strict_optional = false

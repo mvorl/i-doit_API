@@ -1,22 +1,24 @@
-"""
-Requests for API namespace 'cmdb.dialog'
-"""
+from typing import Any, Union, List, Dict
 
 from idoitapi.Request import Request
 from idoitapi.APIException import JSONRPC
 
 
 class CMDBDialog(Request):
+    """
+    Requests for API namespace 'cmdb.dialog'
+    """
 
-    def create(self, category, attribute, value, parent=None):
+    def create(self, category: str, attribute: str, value: Any, parent: Union[str, int] = None) -> int:
         """
         Create a new entry for a drop-down menu
 
         :param str category: Category constant
         :param str attribute: Attribute
         :param value: Value
-        :param parent: Reference parent entry by its title (string) or by its identifier (integer)
-        :type parent: str or int
+        :param parent: (optional) Reference parent entry by its title (string)
+            or by its identifier (integer)
+        :type parent: Union[str, int, None]
         :return: Entry identifier
         :rtype: int
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
@@ -39,13 +41,14 @@ class CMDBDialog(Request):
 
         return result['entry_id']
 
-    def batch_create(self, values):
+    def batch_create(self, values: Dict) -> List[int]:
         """
         Create one or more entries for a drop-down menu
 
-        :param dict values: Values, key is category constant, value is a dict of attribute, value pairs
+        :param dict values: Values,
+            key is category constant, value is a dict of attribute, value pairs
         :return: List of entry identifiers
-        :rtype: list(int)
+        :rtype: List[int]
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
         requests = []
@@ -78,14 +81,14 @@ class CMDBDialog(Request):
 
         return entry_ids
 
-    def read(self, category, attribute):
+    def read(self, category: str, attribute: str) -> List[Dict]:
         """
         Fetch values from drop-down menu
 
         :param str category: Category constant
         :param str attribute: Attribute
         :return: values
-        :rtype: list(dict)
+        :rtype: list[dict]
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
         return self._api.request(
@@ -96,13 +99,13 @@ class CMDBDialog(Request):
             }
         )
 
-    def batch_read(self, attributes):
+    def batch_read(self, attributes: Dict) -> List[Dict]:
         """
         Fetch values from one or more drop-down menus
 
         :param dict attributes: Dict with category constant keys, and attribute name(s) values
         :return: values
-        :rtype: list(dict)
+        :rtype: list[dict]
         """
         requests = list()
 
@@ -122,15 +125,13 @@ class CMDBDialog(Request):
 
         return self._api.batch_request(requests)
 
-    def delete(self, category, attribute, entry_id):
+    def delete(self, category: str, attribute: str, entry_id: int) -> None:
         """
         Purge value from drop-down menu
 
         :param str category: Category constant
         :param str attribute: Attribute
         :param int entry_id: Entry identifier
-        :return: self
-        :rtype: object
         """
         self._api.request(
             'cmdb.dialog.delete',

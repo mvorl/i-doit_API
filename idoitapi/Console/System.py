@@ -1,18 +1,19 @@
-"""
-Requests for API namespace 'console.system'
-"""
+from typing import List
 
 from idoitapi.Console.Console import Console
 
 
 class System(Console):
+    """
+    Requests for API namespace 'console.system'
+    """
 
-    def purge_unfinished_objects(self):
+    def purge_unfinished_objects(self) -> List[str]:
         """
         Purge unfinished objects
 
         :return: Output (one value per line)
-        :rtype: list(str)
+        :rtype: list[str]
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
         return self.execute(
@@ -22,12 +23,12 @@ class System(Console):
             }
         )
 
-    def purge_archived_objects(self):
+    def purge_archived_objects(self) -> List[str]:
         """
         Purge archived objects
 
         :return: Output (one value per line)
-        :rtype: list(str)
+        :rtype: list[str]
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
         return self.execute(
@@ -37,12 +38,12 @@ class System(Console):
             }
         )
 
-    def purge_deleted_objects(self):
+    def purge_deleted_objects(self) -> List[str]:
         """
         Purge deleted objects
 
         :return: Output (one value per line)
-        :rtype: list(str)
+        :rtype: list[str]
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
         return self.execute(

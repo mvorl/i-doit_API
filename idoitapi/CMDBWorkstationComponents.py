@@ -1,13 +1,14 @@
-"""
-Requests for API namespace 'cmdb.workstation_components'
-"""
+from typing import List
 
 from idoitapi.Request import Request
 
 
 class CMDBWorkstationComponents(Request):
+    """
+    Requests for API namespace 'cmdb.workstation_components'
+    """
 
-    def read(self, object_id):
+    def read(self, object_id: int) -> List:
         """
         Reads workplace components for a specific object, for example a person
 
@@ -25,12 +26,11 @@ class CMDBWorkstationComponents(Request):
             }
         )
 
-    def batch_read(self, object_ids):
+    def batch_read(self, object_ids: List[int]) -> List:
         """
         Reads workplace components for one or more objects, for example persons
 
-        :param object_ids: List of object identifiers as integers
-        :type object_ids: list(int)
+        :param list[int] object_ids: List of object identifiers as integers
         :return: result
         :rtype: list
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
@@ -44,7 +44,7 @@ class CMDBWorkstationComponents(Request):
             }
         )
 
-    def read_by_email(self, email):
+    def read_by_email(self, email: str) -> List:
         """
         Reads workplace components for a specific object by its e-mail address, for example a person
 
@@ -62,12 +62,11 @@ class CMDBWorkstationComponents(Request):
             }
         )
 
-    def read_by_emails(self, emails):
+    def read_by_emails(self, emails: List[str]) -> List:
         """
         Reads workplace components for one or more objects by their e-mail addresses, for example persons
 
-        :param emails: List of e-mail addresses as strings
-        :type emails: list(str)
+        :param list[str] emails: List of e-mail addresses as strings
         :return: result
         :rtype: list
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error

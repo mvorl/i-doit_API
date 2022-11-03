@@ -1,17 +1,18 @@
-"""
-Base class for JSON RPC API requests
-"""
+from typing import List, Dict
 
 from idoitapi.API import API
 from idoitapi.APIException import JSONRPC
 
 
 class Request(object):
+    """
+    Base class for JSON RPC API requests
+    """
 
-    def __init__(self, api=None, api_params=None):
+    def __init__(self, api: API = None, api_params: Dict = None) -> None:
         """
         :param api: (optional) a :py:mod:`~idoitapi.API` object
-        :param api_params: (optional) parameters to pass to the API
+        :param dict api_params: (optional) parameters to pass to the API
         """
         if api is None:
             if api_params is None:
@@ -20,7 +21,7 @@ class Request(object):
         self._api = api
 
     @staticmethod
-    def require_success_for(result):
+    def require_success_for(result: Dict) -> int:
         """
         Check for success and return identifier
 
@@ -39,7 +40,7 @@ class Request(object):
         return result['id']
 
     @staticmethod
-    def require_success_without_identifier(result):
+    def require_success_without_identifier(result: Dict) -> None:
         """
         Check for success but ignore identifier
 
@@ -53,12 +54,11 @@ class Request(object):
             raise JSONRPC(message=message)
 
     @staticmethod
-    def require_success_for_all(results):
+    def require_success_for_all(results: List[Dict]) -> None:
         """
         Check whether each request in a batch was successful
 
-        :param results: Results
-        :type results: list(dict)
+        :param list[dict] results: Results
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
         for result in results:

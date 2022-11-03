@@ -1,22 +1,21 @@
-"""
-Requests for API namespace 'cmdb.logbook'
-"""
+from typing import List, Dict
 
 from idoitapi.Request import Request
 from idoitapi.APIException import JSONRPC
 
 
 class CMDBLogbook(Request):
+    """
+    Requests for API namespace 'cmdb.logbook'
+    """
 
-    def create(self, object_id, message, description=None):
+    def create(self, object_id: int, message: str, description: str = None) -> None:
         """
         Create a new logbook entry
 
         :param int object_id: Object identifier
         :param str message: Message
         :param str description: (optional) Description
-        :return: self
-        :rtype: object
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
         params = {
@@ -34,17 +33,13 @@ class CMDBLogbook(Request):
 
         self.require_success_without_identifier(result)
 
-        return self
-
-    def batch_create(self, object_id, messages):
+    def batch_create(self, object_id: int, messages: List[str]) -> None:
         """
         Create one or more logbook entries for a specific object
 
         :param int object_id: Object identifier
         :param messages: List of messages as strings
-        :type messages: list(str)
-        :return: self
-        :rtype: object
+        :type messages: list[str]
         """
         requests = []
 
@@ -59,18 +54,16 @@ class CMDBLogbook(Request):
 
         self._api.batch_request(requests)
 
-        return self
-
-    def read(self, since=None, limit=1000):
+    def read(self, since: str = None, limit: int = 1000) -> List[Dict]:
         """
         Fetch all logbook entries
 
         :param str since: (optional) list only entries since a specific date;
           supports everything which can be parsed by PHP's
           `strtotime() <https://www.php.net/manual/en/function.strtotime.php>`_
-        :param int limit: Limit number of entries
+        :param int limit: (optional) Limit number of entries; default: 1000
         :return: List of dicts
-        :rtype: list(dict)
+        :rtype: list[dict]
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
         params = {
@@ -85,7 +78,7 @@ class CMDBLogbook(Request):
             params,
         )
 
-    def read_by_object(self, object_id, since=None, limit=1000):
+    def read_by_object(self, object_id: int, since: str = None, limit: int = 1000) -> List[Dict]:
         """
         Fetch all logbook entries for a specific object
 
@@ -93,9 +86,9 @@ class CMDBLogbook(Request):
         :param str since: (optional) list only entries since a specific date;
           supports everything which can be parsed by PHP's
           `strtotime() <https://www.php.net/manual/en/function.strtotime.php>`_
-        :param int limit: Limit number of entries
+        :param int limit: (optional) Limit number of entries; default: 1000
         :return: List of dicts
-        :rtype: list(dict)
+        :rtype: list[dict]
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
         params = {

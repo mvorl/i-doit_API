@@ -1,6 +1,4 @@
-"""
-Selector for objects
-"""
+from typing import Union, List
 
 from idoitapi.Request import Request
 from idoitapi.APIException import JSONRPC
@@ -9,17 +7,20 @@ from idoitapi.CMDBCategory import CMDBCategory
 
 
 class Select(Request):
+    """
+    Selector for objects
+    """
 
-    def find(self, category, attribute, value):
+    def find(self, category: str, attribute: str, value: Union[int, str, float]) -> List[int]:
         """
         Find objects by attribute
 
         :param str category: a category string
         :param str attribute: an attribute name
         :param value: an attribute value
-        :type value: str or int or float
+        :type value: Union[int, str, float]
         :return: List of object identifiers as integers
-        :rtype: list(int)
+        :rtype: List[int]
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
         if value is None:

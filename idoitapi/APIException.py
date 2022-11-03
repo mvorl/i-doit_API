@@ -1,33 +1,34 @@
-"""
-Exceptions thrown by i-doit API modules
-"""
+from typing import Any
 
 
 class APIException(Exception):
+    """
+    Exceptions thrown by i-doit API modules
+    """
     pass
 
 
 class JSONRPC(APIException):
-    code = None
-    # code_min = None
-    # code_max = None
-    message = ""
-    meaning = ""
+    code: int = None
+    # code_min: int = None
+    # code_max: int = None
+    message: str = ""
+    meaning: str = ""
 
-    def __init__(self, data=None, raw_code=None, message=None):
+    def __init__(self, data: Any = None, raw_code: int = None, message: str = None) -> None:
         APIException.__init__(self)
         self.data = data
         self.raw_code = raw_code
         self.message = message
 
-    def __str__(self):
+    def __str__(self) -> str:
         return "{message} ({code}) - {meaning}".format(
             message=self.message,
             code=self.code or self.raw_code,
             meaning=self.meaning
         )
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return "{message} ({code}) - {meaning} {data}".format(
             message=self.message,
             code=self.code or self.raw_code,
