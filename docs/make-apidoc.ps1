@@ -1,6 +1,6 @@
 ..\venv\Scripts\activate.ps1
 Remove-Item -Path .\source -Recurse
-sphinx-apidoc.exe -o .\source ..\idoitapi --full -a --separate -H "i-doit_API" -A "Martin Vorländer" -R "1.0b3"
+sphinx-apidoc.exe -o .\source ..\idoitapi --full -a --separate -H "i-doit_API" -A "Martin Vorländer" -R "1.0b4"
 $From = Get-Content -Path .\sphinx-init.py
 Add-Content -Path source\conf.py $From
 Remove-Item -Path .\build -Recurse
