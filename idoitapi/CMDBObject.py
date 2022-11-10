@@ -1,4 +1,4 @@
-from typing import Union, Dict
+from typing import Union, Dict, Any, List
 
 from idoitapi.Request import Request
 from idoitapi.APIException import JSONRPC
@@ -80,7 +80,7 @@ class CMDBObject(Request):
         """
         if True:
 
-            params = {
+            params: Dict[str, Any] = {
                 'type': object_type,
                 'title': title
             }
@@ -107,7 +107,7 @@ class CMDBObject(Request):
             """
             object_id = self.create(object_type, title, attributes)
 
-            requests = list()
+            requests = []
 
             for category, catattr_array in categories.items():
                 for i, catattrs in enumerate(catattr_array):
@@ -146,7 +146,7 @@ class CMDBObject(Request):
                 if 'entry' in params:
                     # For multi-valued categories, value is a list of IDs
                     if category not in result['categories']:
-                        result['categories'][category] = list()
+                        result['categories'][category] = []
                     result['categories'][category][params['entry']] = entry['entry']
                 else:
                     result['categories'].update({category: entry['entry']})
@@ -319,7 +319,7 @@ class CMDBObject(Request):
             if category_type not in obj:
                 continue
 
-            category_constants = list()
+            category_constants = []
 
             for idx in obj[category_type]:
                 if 'const' not in idx:
@@ -330,7 +330,7 @@ class CMDBObject(Request):
                 if category_constant in blacklisted_category_constants:
                     continue
 
-                idx['entries'] = list()
+                idx['entries'] = []
 
                 category_constants.append(category_constant)
 
@@ -338,7 +338,7 @@ class CMDBObject(Request):
 
             for i, c in enumerate(category_constants):
                 idx = -1
-                entries = list()
+                entries: List[Dict] = []
 
                 for key, category in enumerate(obj[category_type]):
                     if category.get('const', None) == c:

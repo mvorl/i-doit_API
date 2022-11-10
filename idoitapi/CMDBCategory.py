@@ -278,9 +278,9 @@ class CMDBCategory(Request):
         :rtype: list[int]
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
-        entry_ids = list()
+        entry_ids = []
 
-        requests = list()
+        requests = []
 
         for object_id in object_ids:
             for data in attributes:
@@ -302,7 +302,7 @@ class CMDBCategory(Request):
 
         return entry_ids
 
-    def batch_read(self, object_ids: List[int], categories: List[str], status: int = 2) -> List[Dict]:
+    def batch_read(self, object_ids: List[int], categories: List[str], status: int = 2) -> List[List]:
         """
         Read one or more category entries for one or more objects
 
@@ -323,7 +323,7 @@ class CMDBCategory(Request):
         if len(categories) == 0:
             raise JSONRPC(message='Needed at least one category constant')
 
-        requests = list()
+        requests = []
 
         for object_id in object_ids:
             if not isinstance(object_id, int) or object_id <= 0:
@@ -365,7 +365,7 @@ class CMDBCategory(Request):
         :param dict attributes: Attributes
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
-        requests = list()
+        requests = []
 
         for object_id in object_ids:
             requests.append({
@@ -395,7 +395,7 @@ class CMDBCategory(Request):
 
         batch = self.batch_read([object_id], categories)
 
-        requests = list()
+        requests = []
 
         for idx, entries in enumerate(batch):
             category = categories[idx]

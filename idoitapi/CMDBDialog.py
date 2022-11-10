@@ -107,7 +107,7 @@ class CMDBDialog(Request):
         :return: values
         :rtype: list[dict]
         """
-        requests = list()
+        requests = []
 
         for category, mixed in attributes.items():
             if isinstance(mixed, list):

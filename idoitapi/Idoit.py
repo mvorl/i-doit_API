@@ -41,7 +41,7 @@ class Idoit(Request):
         """
         return self._api.request('idoit.version')
 
-    def get_addons(self) -> Dict:
+    def get_addons(self) -> List[Any]:
         """
         Read information about installed add-ons
 
@@ -98,7 +98,7 @@ class Idoit(Request):
         :param list[str] queries: Queries as strings
         :return: Search results
         """
-        requests = list()
+        requests = []
 
         for query in queries:
             requests.append({

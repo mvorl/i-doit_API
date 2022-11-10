@@ -46,7 +46,7 @@ class CMDBLocationTree(Request):
         """
         children = self.read(object_id, status)
 
-        tree = list()
+        tree = []
 
         if level != 0:
             for child in children:

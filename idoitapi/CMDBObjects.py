@@ -1,4 +1,4 @@
-from typing import List, Union, Dict, Type
+from typing import List, Union, Dict, Any, Literal
 
 from idoitapi.Request import Request
 from idoitapi.APIException import JSONRPC, InvalidParams
@@ -28,7 +28,7 @@ class CMDBObjects(Request):
         if len(objects) == 0:
             return []
 
-        requests = list()
+        requests = []
 
         for obj in objects:
             requests.append({
@@ -46,7 +46,7 @@ class CMDBObjects(Request):
              offset: int = None,
              order_by: str = None,
              sort: str = None,
-             categories: Union[List[str], Type[True]] = None
+             categories: Union[List[str], Literal[True]] = None
              ) -> List[Dict]:
         """
         Fetch objects.
@@ -72,7 +72,7 @@ class CMDBObjects(Request):
         :return: list[dict]
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
-        params = {}
+        params: Dict[str, Any] = {}
 
         if isinstance(filter_params, dict):
             params['filter'] = filter_params
@@ -104,7 +104,7 @@ class CMDBObjects(Request):
             params
         )
 
-    def read_by_ids(self, object_ids: List[int], categories: Union[List[str], Type[True]] = None) -> List[Dict]:
+    def read_by_ids(self, object_ids: List[int], categories: Union[List[str], Literal[True]] = None) -> List[Dict]:
         """
         Fetch objects by their identifiers.
 
@@ -119,7 +119,7 @@ class CMDBObjects(Request):
         """
         if not isinstance(object_ids, list):
             raise InvalidParams(message='objects parameter is invalid')
-        params = {
+        params: Dict[str, Any] = {
             'filter': {
                 'ids': object_ids
             }
@@ -133,7 +133,7 @@ class CMDBObjects(Request):
             params
         )
 
-    def read_by_type(self, object_type: str, categories: Union[List[str], Type[True]] = None) -> List[Dict]:
+    def read_by_type(self, object_type: str, categories: Union[List[str], Literal[True]] = None) -> List[Dict]:
         """
         Fetch objects by their object type.
 
@@ -146,7 +146,7 @@ class CMDBObjects(Request):
         :rtype: list[dict]
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
-        params = {
+        params: Dict[str, Any] = {
             'filter': {
                 'type': object_type
             }
@@ -160,7 +160,7 @@ class CMDBObjects(Request):
             params
         )
 
-    def read_archived(self, object_type: str = None, categories: Union[List[str], Type[True]] = None) -> List[Dict]:
+    def read_archived(self, object_type: str = None, categories: Union[List[str], Literal[True]] = None) -> List[Dict]:
         """
         Fetch archived objects optionally filtered by type
 
@@ -173,7 +173,7 @@ class CMDBObjects(Request):
         :rtype: list[dict]
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
-        params = {
+        params: Dict[str, Any] = {
             'filter': {
                 'status': 'C__RECORD_STATUS__ARCHIVED'
             }
@@ -190,7 +190,7 @@ class CMDBObjects(Request):
             params
         )
 
-    def read_deleted(self, object_type: str = None, categories: Union[List[str], Type[True]] = None) -> List[Dict]:
+    def read_deleted(self, object_type: str = None, categories: Union[List[str], Literal[True]] = None) -> List[Dict]:
         """
         Fetch deleted objects optionally filtered by type
 
@@ -202,7 +202,7 @@ class CMDBObjects(Request):
         :return: List of dicts
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
-        params = {
+        params: Dict[str, Any] = {
             'filter': {
                 'status': 'C__RECORD_STATUS__DELETED'
             }
@@ -259,7 +259,7 @@ class CMDBObjects(Request):
         if len(objects) == 0:
             return
 
-        requests = list()
+        requests = []
 
         for obj in objects:
             requests.append({
@@ -281,7 +281,7 @@ class CMDBObjects(Request):
         if len(object_ids) == 0:
             return
 
-        requests = list()
+        requests = []
 
         for obj in object_ids:
             requests.append({
@@ -305,7 +305,7 @@ class CMDBObjects(Request):
         if len(object_ids) == 0:
             return
 
-        requests = list()
+        requests = []
 
         for obj in object_ids:
             requests.append({
@@ -329,7 +329,7 @@ class CMDBObjects(Request):
         if len(object_ids) == 0:
             return
 
-        requests = list()
+        requests = []
 
         for obj in object_ids:
             requests.append({
@@ -353,7 +353,7 @@ class CMDBObjects(Request):
         if len(object_ids) == 0:
             return
 
-        requests = list()
+        requests = []
 
         for object_id in object_ids:
             requests.append({

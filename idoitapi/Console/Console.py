@@ -1,7 +1,7 @@
-from typing import List, Dict
+from typing import List, Dict, Any
 
-from idoitapi.Request import Request
 from idoitapi.APIException import JSONRPC
+from idoitapi.Request import Request
 
 
 class Console(Request):
@@ -20,7 +20,7 @@ class Console(Request):
         :rtype: list[str]
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
-        params = {}
+        params: Dict[str, Any] = {}
 
         if isinstance(options, dict) and len(options) > 0:
             params['options'] = options

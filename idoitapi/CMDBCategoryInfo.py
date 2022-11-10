@@ -36,7 +36,7 @@ class CMDBCategoryInfo(Request):
         :return: Result set
         :rtype: list[dict]
         """
-        requests = list()
+        requests = []
 
         for category in categories:
             requests.append({

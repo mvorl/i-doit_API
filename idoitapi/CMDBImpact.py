@@ -58,7 +58,7 @@ class CMDBImpact(Request):
 
     def read_by_types(self, object_id: int, relation_types: List[Union[int, str]], status: int = None) -> Any:
         """
-        Perform an impact analysis for a specific object by one ore more relation type constant or identifiers
+        Perform an impact analysis for a specific object by one or more relation type constant or identifiers
 
         :param int object_id: Object identifier
         :param List[Union[int, str]] relation_types: List of relation type constants

@@ -221,13 +221,13 @@ class API(object):
         if isinstance(headers, dict):
             req_headers.update(headers)
 
-        data = list()
+        data = []
 
         for rq in payload:
             if 'method' not in rq:
                 raise JSONRPC(message='Missing method in one of the sub-requests of this batch request')
 
-            params = dict()
+            params = {}
 
             if 'params' in rq:
                 params = rq['params']
@@ -251,7 +251,7 @@ class API(object):
             headers=req_headers
         ).json()
 
-        results = list()
+        results = []
 
         for response in responses:
             if not isinstance(response, dict):

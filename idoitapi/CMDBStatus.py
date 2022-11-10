@@ -1,4 +1,4 @@
-from typing import List, Dict
+from typing import List, Dict, Union
 
 from idoitapi.Request import Request
 # from idoitapi.APIException import JSONRPC
@@ -39,7 +39,7 @@ class CMDBStatus(Request):
         :rtype: int
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
-        params = {
+        params: Dict[str, Union[str, int]] = {
             self.ATTRIBUTE_TITLE: title,
             self.ATTRIBUTE_CONSTANT: constant,
             self.ATTRIBUTE_COLOR: color,

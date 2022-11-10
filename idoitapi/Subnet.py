@@ -1,4 +1,4 @@
-from typing import Union, List
+from typing import Union, List, Optional
 
 from idoitapi.Request import Request
 from idoitapi.CMDBCategory import CMDBCategory
@@ -17,13 +17,13 @@ class Subnet(Request):
         self.taken: List[str] = []
         """List of used IP addresses"""
 
-        self.current: int = None
+        self.current: Optional[int] = None
         """Current IP address as long integer"""
 
-        self.first: int = None
+        self.first: Optional[int] = None
         """First IP address in subnet as long integer"""
 
-        self.last: int = None
+        self.last: Optional[int] = None
         """Last IP address in subnet as long integer"""
 
     def load(self, object_id: int) -> None:

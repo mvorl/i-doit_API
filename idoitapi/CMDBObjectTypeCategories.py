@@ -1,4 +1,4 @@
-from typing import List, Union
+from typing import List, Union, Any
 
 from idoitapi.Request import Request
 
@@ -47,7 +47,7 @@ class CMDBObjectTypeCategories(Request):
         """
         return self.read(object_type)
 
-    def batch_read(self, object_types: List[Union[int, str]]) -> List:
+    def batch_read(self, object_types: Union[List[int], List[str]]) -> List[Any]:
         """
         Fetches assigned categories for one or more objects types at once
         identified by their identifiers or constants
@@ -57,7 +57,7 @@ class CMDBObjectTypeCategories(Request):
         :return: Result
         :rtype: list
         """
-        requests = list()
+        requests = []
 
         for object_type in object_types:
             requests.append({
@@ -69,7 +69,7 @@ class CMDBObjectTypeCategories(Request):
 
         return self._api.batch_request(requests)
 
-    def batch_read_by_id(self, object_types: List[int]) -> List:
+    def batch_read_by_id(self, object_types: List[int]) -> List[Any]:
         """
         Fetches assigned categories for one or more objects types at once
         identified by their identifiers
@@ -81,7 +81,7 @@ class CMDBObjectTypeCategories(Request):
         """
         return self.batch_read(object_types)
 
-    def batch_read_by_const(self, object_types: List[str]) -> List:
+    def batch_read_by_const(self, object_types: List[str]) -> List[Any]:
         """
         Fetches assigned categories for one or more objects types at once
         identified by their constants

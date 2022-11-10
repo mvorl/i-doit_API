@@ -1,7 +1,7 @@
-from typing import List
+from typing import List, Dict, Union
 
-from idoitapi.Request import Request
 from idoitapi.APIException import InvalidParams
+from idoitapi.Request import Request
 
 
 class CMDBObjectTypeGroups(Request):
@@ -30,7 +30,7 @@ class CMDBObjectTypeGroups(Request):
         :rtype: list
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
-        params = dict()
+        params: Dict[str, Union[str, int]] = {}
 
         if order_by is not None:
             if order_by not in ('title', 'status', 'constant', 'id'):

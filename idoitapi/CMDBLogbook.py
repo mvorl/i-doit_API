@@ -1,7 +1,6 @@
-from typing import List, Dict
+from typing import List, Dict, Union
 
 from idoitapi.Request import Request
-from idoitapi.APIException import JSONRPC
 
 
 class CMDBLogbook(Request):
@@ -66,7 +65,7 @@ class CMDBLogbook(Request):
         :rtype: list[dict]
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
-        params = {
+        params: Dict[str, Union[str, int]] = {
             'limit': limit,
         }
 
@@ -91,7 +90,7 @@ class CMDBLogbook(Request):
         :rtype: list[dict]
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
-        params = {
+        params: Dict[str, Union[str, int]] = {
             'object_id': object_id,
             'limit': limit,
         }
