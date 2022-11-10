@@ -27,7 +27,7 @@ api = API(
     key=config['IDOIT_API_KEY'],
     username=config['IDOIT_USERNAME'],
     password=config['IDOIT_PASSWORD'],
-    language=config['IDOIT_LANGUAGE'],
+    language=config.get('IDOIT_LANGUAGE', 'en'),
 )
 
 try:
