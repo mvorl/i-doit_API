@@ -42,7 +42,7 @@ class Select(Request):
                 break
 
             result = CMDBCategory(self._api).batch_read(
-                [obj['id'] for obj in objects],
+                [int(obj['id']) for obj in objects],
                 [category, ]
             )
 
@@ -61,7 +61,7 @@ class Select(Request):
                             if 'objID' not in categoryEntry:
                                 raise JSONRPC(message='Found attribute for unknown object')
 
-                            object_ids.append(categoryEntry['objID'])
+                            object_ids.append(int(categoryEntry['objID']))
 
             if count < limit:
                 break

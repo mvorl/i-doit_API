@@ -39,7 +39,7 @@ class CMDBDialog(Request):
         if 'entry_id' not in result or not isinstance(result['entry_id'], int):
             raise JSONRPC(message='Bad result')
 
-        return result['entry_id']
+        return int(result['entry_id'])
 
     def batch_create(self, values: Dict) -> List[int]:
         """
@@ -77,7 +77,7 @@ class CMDBDialog(Request):
         for entry in entries:
             if 'entry_id' not in entry or not isinstance(entry['entry_id'], int):
                 raise JSONRPC(message='Bad result')
-            entry_ids.append(entry['entry_id'])
+            entry_ids.append(int(entry['entry_id']))
 
         return entry_ids
 

@@ -121,7 +121,7 @@ class CMDBCategory(Request):
                 raise JSONRPC(
                     message='Entries for category "{}" contain no identifier'.format(category)
                 )
-            if entry['id'] == entry_id:
+            if int(entry['id']) == entry_id:
                 return entry
         else:
             raise JSONRPC(
@@ -298,7 +298,7 @@ class CMDBCategory(Request):
         self.require_success_for_all(results)
 
         for entry in results:
-            entry_ids.append(entry['id'])
+            entry_ids.append(int(entry['id']))
 
         return entry_ids
 
@@ -406,7 +406,7 @@ class CMDBCategory(Request):
                     'params': {
                         'object': object_id,
                         'category': category,
-                        'entry': entry['id']
+                        'entry': int(entry['id'])
                     }
                 })
                 counter += 1

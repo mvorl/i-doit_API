@@ -64,7 +64,7 @@ class CMDBCategoryInfo(Request):
         """
         category_consts = set()
         object_types = CMDBObjectTypes(self._api).read()
-        object_type_ids = [object_type['id'] for object_type in object_types]
+        object_type_ids = [int(object_type['id']) for object_type in object_types]
         object_type_categories_batch = CMDBObjectTypeCategories(self._api).batch_read(object_type_ids)
         cat_types = ('catg', 'cats', 'custom')
 

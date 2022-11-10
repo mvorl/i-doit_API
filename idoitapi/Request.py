@@ -37,7 +37,7 @@ class Request(object):
                 message += ': ' + result['message']
             raise JSONRPC(message=message)
 
-        return result['id']
+        return int(result['id'])
 
     @staticmethod
     def require_success_without_identifier(result: Dict) -> None:
