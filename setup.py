@@ -8,7 +8,7 @@ def readme():
 
 setup(
     name='idoitapi',
-    version='1.0b4',
+    version='1.0b5',
 
     description='i-doit JSON RPC API',
     long_description="Python implementation of Benjamin Heisig's PHP-based i-doit API client library",
