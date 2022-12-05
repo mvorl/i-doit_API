@@ -58,7 +58,7 @@ class Subnet(Request):
         :rtype: bool
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
-        if self.current is None:
+        if self.current is None or self.last is None:
             raise JSONRPC(message='You need to call method "load()" first.')
 
         for ip_long in range(self.current, self.last+1):
@@ -75,7 +75,7 @@ class Subnet(Request):
         :rtype: Union[str, None]
         :raises: :py:exc:`~idoitapi.APIException.APIException` on error
         """
-        if self.current is None:
+        if self.current is None or self.last is None:
             raise JSONRPC(message='You need to call method "load()" first.')
 
         for ip_long in range(self.current, self.last+1):

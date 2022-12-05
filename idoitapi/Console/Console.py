@@ -1,4 +1,4 @@
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 
 from idoitapi.APIException import JSONRPC
 from idoitapi.Request import Request
@@ -9,7 +9,7 @@ class Console(Request):
     Requests for API namespace 'console'
     """
 
-    def execute(self, method: str, options: Dict = None, arguments: List[str] = None) -> List[str]:
+    def execute(self, method: str, options: Optional[Dict] = None, arguments: Optional[List[str]] = None) -> List[str]:
         """
         Execute command
 

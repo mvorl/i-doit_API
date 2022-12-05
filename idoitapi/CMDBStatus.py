@@ -1,4 +1,4 @@
-from typing import List, Dict, Union
+from typing import List, Dict, Union, Optional
 
 from idoitapi.Request import Request
 # from idoitapi.APIException import JSONRPC
@@ -27,7 +27,7 @@ class CMDBStatus(Request):
             'cmdb.status.read'
         )
 
-    def save(self, title: str, constant: str, color: str, identifier: int = None) -> int:
+    def save(self, title: str, constant: str, color: str, identifier: Optional[int] = None) -> int:
         """
         Create new or update existing CMDB status
 

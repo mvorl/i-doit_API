@@ -1,4 +1,4 @@
-from typing import List, Dict
+from typing import List, Dict, Optional
 
 from idoitapi.API import API
 from idoitapi.APIException import JSONRPC
@@ -9,7 +9,7 @@ class Request(object):
     Base class for JSON RPC API requests
     """
 
-    def __init__(self, api: API = None, api_params: Dict = None) -> None:
+    def __init__(self, api: Optional[API] = None, api_params: Optional[Dict] = None) -> None:
         """
         :param api: (optional) a :py:mod:`~idoitapi.API` object
         :param dict api_params: (optional) parameters to pass to the API

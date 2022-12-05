@@ -1,4 +1,4 @@
-from typing import Any, Union, List, Dict
+from typing import Any, Union, List, Dict, Optional
 
 from idoitapi.Request import Request
 from idoitapi.APIException import JSONRPC
@@ -9,7 +9,7 @@ class CMDBDialog(Request):
     Requests for API namespace 'cmdb.dialog'
     """
 
-    def create(self, category: str, attribute: str, value: Any, parent: Union[str, int] = None) -> int:
+    def create(self, category: str, attribute: str, value: Any, parent: Optional[Union[str, int]] = None) -> int:
         """
         Create a new entry for a drop-down menu
 

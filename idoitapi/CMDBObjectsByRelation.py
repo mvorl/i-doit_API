@@ -1,4 +1,4 @@
-from typing import Union, List
+from typing import Union, List, Optional
 
 from idoitapi.Request import Request
 
@@ -8,7 +8,7 @@ class CMDBObjectsByRelation(Request):
     Requests for API namespace 'cmdb.objects_by_relation'
     """
 
-    def read(self, object_id: int, relation_type: Union[int, str], status: int = None) -> List:
+    def read(self, object_id: int, relation_type: Union[int, str], status: Optional[int] = None) -> List:
         """
         Read object relations by their type identifier or constant
 
@@ -34,7 +34,7 @@ class CMDBObjectsByRelation(Request):
             params=params
         )
 
-    def read_by_id(self, object_id: int, relation_type: int, status: int = None) -> List:
+    def read_by_id(self, object_id: int, relation_type: int, status: Optional[int] = None) -> List:
         """
         Read object relations by their type identifier
 
@@ -48,7 +48,7 @@ class CMDBObjectsByRelation(Request):
          """
         return self.read(object_id, relation_type, status)
 
-    def read_by_const(self, object_id: int, relation_type: str, status: int = None) -> List:
+    def read_by_const(self, object_id: int, relation_type: str, status: Optional[int] = None) -> List:
         """
         Read object relations by their type constant
 

@@ -1,4 +1,4 @@
-from typing import List, Union, Dict, Any, Literal
+from typing import List, Union, Dict, Any, Literal, Optional
 
 from idoitapi.Request import Request
 from idoitapi.APIException import JSONRPC, InvalidParams
@@ -41,12 +41,12 @@ class CMDBObjects(Request):
         return [obj['id'] for obj in result]
 
     def read(self,
-             filter_params: Dict = None,
-             limit: int = None,
-             offset: int = None,
-             order_by: str = None,
-             sort: str = None,
-             categories: Union[List[str], Literal[True]] = None
+             filter_params: Optional[Dict] = None,
+             limit: Optional[int] = None,
+             offset: Optional[int] = None,
+             order_by: Optional[str] = None,
+             sort: Optional[str] = None,
+             categories: Optional[Union[List[str], Literal[True]]] = None
              ) -> List[Dict]:
         """
         Fetch objects.
@@ -104,7 +104,10 @@ class CMDBObjects(Request):
             params
         )
 
-    def read_by_ids(self, object_ids: List[int], categories: Union[List[str], Literal[True]] = None) -> List[Dict]:
+    def read_by_ids(self,
+                    object_ids: List[int],
+                    categories: Optional[Union[List[str], Literal[True]]] = None
+                    ) -> List[Dict]:
         """
         Fetch objects by their identifiers.
 
@@ -133,7 +136,10 @@ class CMDBObjects(Request):
             params
         )
 
-    def read_by_type(self, object_type: str, categories: Union[List[str], Literal[True]] = None) -> List[Dict]:
+    def read_by_type(self,
+                     object_type: str,
+                     categories: Optional[Union[List[str], Literal[True]]] = None
+                     ) -> List[Dict]:
         """
         Fetch objects by their object type.
 
@@ -160,7 +166,10 @@ class CMDBObjects(Request):
             params
         )
 
-    def read_archived(self, object_type: str = None, categories: Union[List[str], Literal[True]] = None) -> List[Dict]:
+    def read_archived(self,
+                      object_type: Optional[str] = None,
+                      categories: Optional[Union[List[str], Literal[True]]] = None
+                      ) -> List[Dict]:
         """
         Fetch archived objects optionally filtered by type
 
@@ -190,7 +199,10 @@ class CMDBObjects(Request):
             params
         )
 
-    def read_deleted(self, object_type: str = None, categories: Union[List[str], Literal[True]] = None) -> List[Dict]:
+    def read_deleted(self,
+                     object_type: Optional[str] = None,
+                     categories: Optional[Union[List[str], Literal[True]]] = None
+                     ) -> List[Dict]:
         """
         Fetch deleted objects optionally filtered by type
 
@@ -219,7 +231,7 @@ class CMDBObjects(Request):
             params
         )
 
-    def get_id(self, title: str, object_type: str = None) -> int:
+    def get_id(self, title: str, object_type: Optional[str] = None) -> int:
         """
         Fetch an object identifier by object title and (optional) type
 

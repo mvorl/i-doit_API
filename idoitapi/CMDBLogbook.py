@@ -1,4 +1,4 @@
-from typing import List, Dict, Union
+from typing import List, Dict, Union, Optional
 
 from idoitapi.Request import Request
 
@@ -8,7 +8,7 @@ class CMDBLogbook(Request):
     Requests for API namespace 'cmdb.logbook'
     """
 
-    def create(self, object_id: int, message: str, description: str = None) -> None:
+    def create(self, object_id: int, message: str, description: Optional[str] = None) -> None:
         """
         Create a new logbook entry
 
@@ -53,7 +53,7 @@ class CMDBLogbook(Request):
 
         self._api.batch_request(requests)
 
-    def read(self, since: str = None, limit: int = 1000) -> List[Dict]:
+    def read(self, since: Optional[str] = None, limit: int = 1000) -> List[Dict]:
         """
         Fetch all logbook entries
 
@@ -77,7 +77,7 @@ class CMDBLogbook(Request):
             params,
         )
 
-    def read_by_object(self, object_id: int, since: str = None, limit: int = 1000) -> List[Dict]:
+    def read_by_object(self, object_id: int, since: Optional[str] = None, limit: int = 1000) -> List[Dict]:
         """
         Fetch all logbook entries for a specific object
 

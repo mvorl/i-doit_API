@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Optional
 
 
 class APIException(Exception):
@@ -9,13 +9,13 @@ class APIException(Exception):
 
 
 class JSONRPC(APIException):
-    code: int = None
+    code: Optional[int] = None
     # code_min: int = None
     # code_max: int = None
-    message: str = ""
-    meaning: str = ""
+    message: Optional[str] = ""
+    meaning: Optional[str] = ""
 
-    def __init__(self, data: Any = None, raw_code: int = None, message: str = None) -> None:
+    def __init__(self, data: Any = None, raw_code: Optional[int] = None, message: Optional[str] = None) -> None:
         APIException.__init__(self)
         self.data = data
         self.raw_code = raw_code
