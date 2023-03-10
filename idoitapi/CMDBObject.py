@@ -182,9 +182,9 @@ class CMDBObject(Request):
             'id': object_id
         }
 
-        supported_attributes = (
+        supported_attributes = [
             'title'
-        )
+        ]
 
         for supported_attribute in supported_attributes:
             if supported_attribute in attributes:
