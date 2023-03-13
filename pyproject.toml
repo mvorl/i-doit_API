@@ -29,4 +29,4 @@ push = true
 
 [mypy]
 packages = "idoitapi"
-strict_optional = false
+# strict_optional = false

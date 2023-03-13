@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Optional
 
 from idoitapi.Request import Request
 from idoitapi.APIException import JSONRPC
@@ -9,7 +9,7 @@ class CMDBLocationTree(Request):
     Requests for API namespace 'cmdb.location_tree'
     """
 
-    def read(self, object_id: int, status: int = None) -> Any:
+    def read(self, object_id: int, status: Optional[int] = None) -> Any:
         """
         Reads objects located directly under an object
 
@@ -32,7 +32,7 @@ class CMDBLocationTree(Request):
             params
         )
 
-    def read_recursively(self, object_id: int, status: int = None, level: int = -1) -> Any:
+    def read_recursively(self, object_id: int, status: Optional[int] = None, level: int = -1) -> Any:
         """
         Reads recursively objects located under an object
 

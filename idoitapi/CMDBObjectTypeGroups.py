@@ -1,4 +1,4 @@
-from typing import List, Dict, Union
+from typing import List, Dict, Union, Optional
 
 from idoitapi.APIException import InvalidParams
 from idoitapi.Request import Request
@@ -17,7 +17,11 @@ class CMDBObjectTypeGroups(Request):
     SORT_ASCENDING = 'asc'
     SORT_DESCENDING = 'desc'
 
-    def read(self, order_by: str = None, sort_direction: str = None, limit: int = None) -> List:
+    def read(self,
+             order_by: Optional[str] = None,
+             sort_direction: Optional[str] = None,
+             limit: Optional[int] = None
+             ) -> List:
         """
         Fetch object type groups
 

@@ -1,4 +1,4 @@
-from typing import List, Dict
+from typing import List, Dict, Optional
 
 from idoitapi.Console.Console import Console
 
@@ -8,7 +8,7 @@ class Import(Console):
     Requests for API namespace 'console.import'
     """
 
-    def import_from_csv_file(self, options: Dict = None) -> List[str]:
+    def import_from_csv_file(self, options: Optional[Dict] = None) -> List[str]:
         """
         Import data from CSV file located on i-doit host
 
@@ -34,7 +34,7 @@ class Import(Console):
             'console.import.csvprofiles'
         )
 
-    def import_from_inventory(self, options: Dict = None) -> List[str]:
+    def import_from_inventory(self, options: Optional[Dict] = None) -> List[str]:
         """
         Import data from h-inventory output file located on i-doit host
 
@@ -48,7 +48,7 @@ class Import(Console):
             options
         )
 
-    def import_from_jdisc_discovery(self, options: Dict = None) -> List[str]:
+    def import_from_jdisc_discovery(self, options: Optional[Dict] = None) -> List[str]:
         """
         Import data from JDisc Discovery instance
 
@@ -62,7 +62,7 @@ class Import(Console):
             options
         )
 
-    def trigger_jdisc_discovery(self, options: Dict = None) -> List[str]:
+    def trigger_jdisc_discovery(self, options: Optional[Dict] = None) -> List[str]:
         """
         Trigger discovery job on JDisc Discovery instance
 
@@ -76,7 +76,7 @@ class Import(Console):
             options
         )
 
-    def import_from_ocs_inventory_ng(self, options: Dict = None) -> List[str]:
+    def import_from_ocs_inventory_ng(self, options: Optional[Dict] = None) -> List[str]:
         """
         Import data from OCS Inventory NG instance
 
@@ -90,7 +90,7 @@ class Import(Console):
             options
         )
 
-    def import_from_syslog(self, options: Dict = None) -> List[str]:
+    def import_from_syslog(self, options: Optional[Dict] = None) -> List[str]:
         """
         Import data from syslog
 
@@ -104,7 +104,7 @@ class Import(Console):
             options
         )
 
-    def import_from_xml_file(self, options: Dict = None) -> List[str]:
+    def import_from_xml_file(self, options: Optional[Dict] = None) -> List[str]:
         """
         Import data from XML file located on i-doit host
 

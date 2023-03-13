@@ -1,4 +1,4 @@
-from typing import List, Dict
+from typing import List, Dict, Optional
 
 from idoitapi.Console.Console import Console
 
@@ -36,7 +36,7 @@ class LDAP(Console):
             'console.ldap.sync'
         )
 
-    def sync_distinguished_names(self, options: Dict = None) -> List[str]:
+    def sync_distinguished_names(self, options: Optional[Dict] = None) -> List[str]:
         """
         Synchronize distinguished names (DN) from LDAP user accounts with
         i-doit person objects

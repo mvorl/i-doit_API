@@ -1,4 +1,4 @@
-from typing import List, Dict
+from typing import List, Dict, Optional
 
 from idoitapi.Console.Console import Console
 
@@ -8,7 +8,7 @@ class Report(Console):
     Requests for API namespace 'console.report'
     """
 
-    def export(self, options: Dict = None) -> List[str]:
+    def export(self, options: Optional[Dict] = None) -> List[str]:
         """
         Export report as file
 

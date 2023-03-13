@@ -1,4 +1,4 @@
-from typing import Union, List, Any
+from typing import Union, List, Any, Optional
 
 from idoitapi.Request import Request
 from idoitapi.APIException import JSONRPC
@@ -9,7 +9,11 @@ class CMDBImpact(Request):
     Requests for API namespace 'cmdb.impact'
     """
 
-    def read(self, object_id: int, relation_type: Union[int, str, List[Union[int, str]]], status: int = None) -> Any:
+    def read(self,
+             object_id: int,
+             relation_type: Union[int, str, List[Union[int, str]]],
+             status: Optional[int] = None
+             ) -> Any:
         """
         Perform an impact analysis for a specific object by its relation type identifier or constant
 
@@ -32,7 +36,7 @@ class CMDBImpact(Request):
             params
         )
 
-    def read_by_id(self, object_id: int, relation_type: int, status: int = None) -> Any:
+    def read_by_id(self, object_id: int, relation_type: int, status: Optional[int] = None) -> Any:
         """
         Perform an impact analysis for a specific object by its relation type identifier
 
@@ -44,7 +48,7 @@ class CMDBImpact(Request):
         """
         return self.read(object_id, relation_type, status)
 
-    def read_by_const(self, object_id: int, relation_type: str, status: int = None) -> Any:
+    def read_by_const(self, object_id: int, relation_type: str, status: Optional[int] = None) -> Any:
         """
         Perform an impact analysis for a specific object by its relation type constant
 
@@ -56,7 +60,7 @@ class CMDBImpact(Request):
         """
         return self.read(object_id, relation_type, status)
 
-    def read_by_types(self, object_id: int, relation_types: List[Union[int, str]], status: int = None) -> Any:
+    def read_by_types(self, object_id: int, relation_types: List[Union[int, str]], status: Optional[int] = None) -> Any:
         """
         Perform an impact analysis for a specific object by one or more relation type constant or identifiers
 

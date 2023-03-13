@@ -1,5 +1,5 @@
 import json
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
 
 import requests
 from idoitapi.APIException import JSONRPC, InvalidParams, InternalError, MethodNotFound, UnknownError
@@ -19,9 +19,9 @@ class API(object):
     def __init__(self,
                  url: str,
                  key: str,
-                 language: str = None,
-                 username: str = None,
-                 password: str = None
+                 language: Optional[str] = None,
+                 username: Optional[str] = None,
+                 password: Optional[str] = None
                  ) -> None:
         """
         If username and password are not given, 'System API' user will be used.
@@ -89,7 +89,7 @@ class API(object):
         """
         return self._session_id is not None
 
-    def login(self, username: str = None, password: str = None) -> None:
+    def login(self, username: Optional[str] = None, password: Optional[str] = None) -> None:
         """
         Login to API.
 
@@ -141,7 +141,7 @@ class API(object):
         """
         return self._id
 
-    def request(self, method: str, params: Dict = None, headers: Dict = None) -> Any:
+    def request(self, method: str, params: Optional[Dict] = None, headers: Optional[Dict] = None) -> Any:
         """
         Perform a JSON RPC request.
 
@@ -201,7 +201,7 @@ class API(object):
 
         return response['result']
 
-    def batch_request(self, payload: List[Dict], headers: Dict = None) -> List[Any]:
+    def batch_request(self, payload: List[Dict], headers: Optional[Dict] = None) -> List[Any]:
         """
         Perform a JSON RPC batch request.
 

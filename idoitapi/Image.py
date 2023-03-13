@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, Optional
 
 from idoitapi.Request import Request
 from idoitapi.CMDBCategory import CMDBCategory
@@ -10,7 +10,7 @@ class Image(Request):
     Requests for image galleries
     """
 
-    def add(self, object_id: int, file_path: str, caption: str = None) -> None:
+    def add(self, object_id: int, file_path: str, caption: Optional[str] = None) -> None:
         """
         Add a new file to the image gallery.
 

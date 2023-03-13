@@ -1,5 +1,5 @@
 import os
-from typing import Dict
+from typing import Dict, Optional
 
 from idoitapi.Request import Request
 from idoitapi.APIException import JSONRPC
@@ -14,7 +14,7 @@ class File(Request):
     Requests for assigned files
     """
 
-    def add(self, object_id: int, file_path: str, description: str = None) -> None:
+    def add(self, object_id: int, file_path: str, description: Optional[str] = None) -> None:
         """
         Add a new file to a specific object.
         A new file object will be created and assigned to the specific object.
@@ -27,7 +27,7 @@ class File(Request):
         """
         file_object_id = CMDBObject(self._api).create(
             'C__OBJTYPE__FILE',
-            description
+            description if description is not None else ''
         )
 
         cmdb_category = CMDBCategory(self._api)

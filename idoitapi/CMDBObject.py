@@ -1,4 +1,4 @@
-from typing import Union, Dict, Any, List
+from typing import Union, Dict, Any, List, Optional
 
 from idoitapi.Request import Request
 from idoitapi.APIException import JSONRPC
@@ -13,7 +13,7 @@ class CMDBObject(Request):
     Requests for API namespace 'cmdb.object'
     """
 
-    def create(self, object_type: Union[int, str], title: str, attributes: Dict = None) -> int:
+    def create(self, object_type: Union[int, str], title: str, attributes: Optional[Dict] = None) -> int:
         """
         Create a new object.
 
@@ -55,7 +55,8 @@ class CMDBObject(Request):
                                object_type: Union[int, str],
                                title: str,
                                categories: Dict,
-                               attributes: Dict = None) -> Dict:
+                               attributes: Optional[Dict] = None
+                               ) -> Dict:
         """
         Create a new object with category entries.
 
@@ -169,7 +170,7 @@ class CMDBObject(Request):
             }
         )
 
-    def update(self, object_id: int, attributes: Dict = None) -> None:
+    def update(self, object_id: int, attributes: Optional[Dict] = None) -> None:
         """
         Update existing object
 
@@ -182,13 +183,14 @@ class CMDBObject(Request):
             'id': object_id
         }
 
-        supported_attributes = [
-            'title'
-        ]
+        supported_attributes = (
+            'title',
+        )
 
-        for supported_attribute in supported_attributes:
-            if supported_attribute in attributes:
-                params[supported_attribute] = attributes[supported_attribute]
+        if attributes is not None:
+            for supported_attribute in supported_attributes:
+                if supported_attribute in attributes:
+                    params[supported_attribute] = attributes[supported_attribute]
 
         result = self._api.request(
             'cmdb.object.update',
@@ -367,7 +369,7 @@ class CMDBObject(Request):
 
         return objects[0]
 
-    def upsert(self, object_type: Union[int, str], title: str, attributes: Dict = None) -> int:
+    def upsert(self, object_type: Union[int, str], title: str, attributes: Optional[Dict] = None) -> int:
         """
         Create new object or fetch existing one based on its title and type
 

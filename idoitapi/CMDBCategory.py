@@ -1,4 +1,4 @@
-from typing import List, Dict
+from typing import List, Dict, Optional
 
 from idoitapi.Request import Request
 from idoitapi.APIException import JSONRPC
@@ -9,7 +9,7 @@ class CMDBCategory(Request):
     Requests for API namespace 'cmdb.category'
     """
 
-    def save(self, object_id: int, category: str, attributes: Dict, entry_id: int = None) -> int:
+    def save(self, object_id: int, category: str, attributes: Dict, entry_id: Optional[int] = None) -> int:
         """
         Create new or update existing category entry for a specific object.
         Suitable for single- and multi-value categories.
@@ -146,7 +146,7 @@ class CMDBCategory(Request):
             return dict()
         return entries[0]
 
-    def update(self, object_id: int, category: str, attributes: Dict, entry_id: int = None) -> None:
+    def update(self, object_id: int, category: str, attributes: Dict, entry_id: Optional[int] = None) -> None:
         """
         Update category entry for a specific object
 
@@ -206,7 +206,7 @@ class CMDBCategory(Request):
             }
         )
 
-    def purge(self, object_id: int, category: str, entry_id: int = None) -> None:
+    def purge(self, object_id: int, category: str, entry_id: Optional[int] = None) -> None:
         """
         Purge entry in a single- or multi-value category for a specific object
 
