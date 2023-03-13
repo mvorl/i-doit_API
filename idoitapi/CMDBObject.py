@@ -184,7 +184,7 @@ class CMDBObject(Request):
         }
 
         supported_attributes = (
-            'title'
+            'title',
         )
 
         if attributes is not None:
