@@ -182,7 +182,7 @@ class CMDBCategory(Request):
         self._api.request(
             'cmdb.category.archive',
             {
-                'objID': object_id,
+                'object': object_id,
                 'category': category,
                 'entry': entry_id
             }
@@ -200,7 +200,7 @@ class CMDBCategory(Request):
         self._api.request(
             'cmdb.category.delete',
             {
-                'objID': object_id,
+                'object': object_id,
                 'category': category,
                 'entry': entry_id
             }
