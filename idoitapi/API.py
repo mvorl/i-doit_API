@@ -7,7 +7,7 @@ from idoitapi.APIException import JSONRPC, InvalidParams, InternalError, MethodN
 # Values for User-Agent header
 # ToDo: Grab User-Agent name from setup.py
 API_AGENT_NAME = 'idoitapi' + '-python'
-API_AGENT_VERSION = '1.0b5'
+API_AGENT_VERSION = '1.0b6'
 API_AGENT_COMMENT = ''
 
 
