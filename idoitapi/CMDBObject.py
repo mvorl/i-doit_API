@@ -210,7 +210,7 @@ class CMDBObject(Request):
         self._api.request(
             'cmdb.object.archive',
             {
-                'id': object_id
+                'object': object_id
             }
         )
 
@@ -238,7 +238,7 @@ class CMDBObject(Request):
         self._api.request(
             'cmdb.object.purge',
             {
-                'id': object_id
+                'object': object_id
             }
         )
 
@@ -254,7 +254,7 @@ class CMDBObject(Request):
         self._api.request(
             'cmdb.object.markAsTemplate',
             {
-                'id': object_id
+                'object': object_id
             }
         )
 
@@ -270,7 +270,7 @@ class CMDBObject(Request):
         self._api.request(
             'cmdb.object.markAsMassChangeTemplate',
             {
-                'id': object_id
+                'object': object_id
             }
         )
 

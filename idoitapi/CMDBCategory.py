@@ -261,7 +261,7 @@ class CMDBCategory(Request):
             {
                 'objID': object_id,
                 'category': category,
-                'entry': entry_id
+                'cateID': entry_id
             }
         )
 
