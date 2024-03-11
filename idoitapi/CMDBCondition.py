@@ -1,8 +1,8 @@
-from enum import Enum
+from enum import StrEnum
 from idoitapi.Request import Request
 
 
-class ComparisonOperators(Enum):
+class ComparisonOperators(StrEnum):
     """
     Available comparison operators for conditions
     """
@@ -41,7 +41,7 @@ class ComparisonCondition():
     def to_dict(self) -> dict:
         return {
             "property": self._property,
-            "comparison": self._comparison,
+            "comparison": self._comparison.value,
             "value": self._value
         }
 
